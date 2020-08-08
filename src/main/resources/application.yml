@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: postgres
+  data:
+    rest:
+      base-path: /api
+---
+spring:
+  profiles: local
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+---
+spring:
+  profiles: postgres
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    password: pgadmin
+    url: jdbc:postgresql://localhost:5432/kalpha
+    username: pgadmin
