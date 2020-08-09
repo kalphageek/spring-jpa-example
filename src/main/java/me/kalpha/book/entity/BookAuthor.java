@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 @Entity
 @Table
@@ -13,7 +12,7 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 public class BookAuthor {
     @Id @GeneratedValue
-    private BigInteger id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "book_id")

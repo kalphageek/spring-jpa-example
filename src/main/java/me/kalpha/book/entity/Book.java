@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Book {
     @Id @GeneratedValue
-    private BigInteger id;
+    private Long id;
     @NotEmpty
     private String title;
     private LocalDateTime created;

@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.math.BigInteger;
 import java.util.List;
 
 @Entity
@@ -15,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Author {
     @Id @GeneratedValue
-    private BigInteger id;
+    private Long id;
     @NotEmpty
     private String name;
     private String postNo;
