@@ -6,3 +6,11 @@
 	"author": "http://localhost:8080/api/authors/5",
 	"seq":"1"
 }
+```
+## 조인테이블 컬럼값으로 filter
+> [GET] http://localhost:8080/api/books/search/findByAuthorName
+```json
+{
+	"authorName": "박현정"
+}
+```
