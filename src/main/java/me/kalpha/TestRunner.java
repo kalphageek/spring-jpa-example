@@ -1,13 +1,12 @@
 package me.kalpha;
 
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.QBean;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
-import me.kalpha.book.entity.Book;
-import me.kalpha.book.entity.QAuthor;
-import me.kalpha.book.entity.QBook;
-import me.kalpha.book.entity.QBookAuthor;
+import me.kalpha.book.entity.*;
 import me.kalpha.book.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -66,7 +65,8 @@ public class TestRunner implements ApplicationRunner {
         QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
 
         JPAQuery query = queryFactory
-                .selectFrom(qBook)
+                .select(getBookQueryProjection())
+                .from(qBook)
                 .join(qBookAuthor).on(qBook.id.eq(qBookAuthor.book.id))
                 .join(qAuthor).on(qAuthor.id.eq(qBookAuthor.author.id));
 
@@ -75,5 +75,10 @@ public class TestRunner implements ApplicationRunner {
         }
 
         log.info("joinTest Count : {}", query.fetchCount());
+    }
+
+    private QBean<BookQueryDto> getBookQueryProjection() {
+        QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
+        return Projections.bean(BookQueryDto.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
     }
 }

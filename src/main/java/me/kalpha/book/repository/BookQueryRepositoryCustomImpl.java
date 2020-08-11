@@ -1,16 +1,9 @@
 package me.kalpha.book.repository;
 
-import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.ConstructorExpression;
-import com.querydsl.core.types.Order;
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.*;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import me.kalpha.book.entity.Book;
-import me.kalpha.book.entity.QAuthor;
-import me.kalpha.book.entity.QBook;
-import me.kalpha.book.entity.QBookAuthor;
+import me.kalpha.book.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,7 +12,6 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 
 public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport implements BookQueryRepositoryCustom {
     @Autowired
@@ -30,7 +22,7 @@ public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport imp
     }
 
     @Override
-    public Page<Book> findByAuthorName(Pageable pageable, String authorName) {
+    public Page<BookQueryDto> findByAuthorName(Pageable pageable, String authorName) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
         QBook qBook = QBook.book;
@@ -38,7 +30,8 @@ public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport imp
         QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
 
         JPAQuery query = queryFactory
-                .selectFrom(qBook)
+                .from(qBook)
+                .select(getBookQueryProjection())
                 .join(qBookAuthor).on(qBook.id.eq(qBookAuthor.book.id))
                 .join(qAuthor).on(qAuthor.id.eq(qBookAuthor.author.id));
 
@@ -46,13 +39,13 @@ public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport imp
             query.where(qAuthor.name.eq(authorName));
         }
 
-        return new PageImpl<Book>(query.fetchResults().getResults(),
+        return new PageImpl<BookQueryDto>(query.fetchResults().getResults(),
                 pageable,
                 query.fetchResults().getTotal());
     }
 
-    private ConstructorExpression<Book> getBookProjection() {
-        QBook qBook = QBook.book;
-        return Projections.constructor(Book.class, qBook.id, qBook.title, qBook.created);
+    private QBean<BookQueryDto> getBookQueryProjection() {
+        QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
+        return Projections.bean(BookQueryDto.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
     }
 }
