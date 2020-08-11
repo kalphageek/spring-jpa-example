@@ -22,7 +22,7 @@ public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport imp
     }
 
     @Override
-    public Page<BookQueryDto> findByAuthorName(Pageable pageable, String authorName) {
+    public Page<BookQueryDto> findAllByAuthorName(Pageable pageable, String authorName) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
         QBook qBook = QBook.book;

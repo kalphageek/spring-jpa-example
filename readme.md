@@ -8,9 +8,4 @@
 }
 ```
 ## 조인테이블 컬럼값으로 filter
-> [GET] http://localhost:8080/api/books/search/findByAuthorName
-```json
-{
-	"authorName": "박현정"
-}
-```
+> [GET] http://localhost:8080/api/books/search/findByAuthorName?authorName=정진덕
