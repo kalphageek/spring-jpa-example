@@ -6,5 +6,5 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "books", path = "books")
-public interface BookRepository extends JpaRepository<Book, Long>, BookQueryRepositoryCustom, QuerydslPredicateExecutor<Book> {
+public interface BookRepository extends JpaRepository<Book, Long>, QuerydslPredicateExecutor<Book> {
 }

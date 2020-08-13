@@ -77,8 +77,8 @@ public class TestRunner implements ApplicationRunner {
         log.info("joinTest Count : {}", query.fetchCount());
     }
 
-    private QBean<BookQueryDto> getBookQueryProjection() {
+    private QBean<BookDto> getBookQueryProjection() {
         QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
-        return Projections.bean(BookQueryDto.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
+        return Projections.bean(BookDto.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
     }
 }

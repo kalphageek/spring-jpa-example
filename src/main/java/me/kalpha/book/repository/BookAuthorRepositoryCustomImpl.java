@@ -13,16 +13,16 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 
-public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport implements BookQueryRepositoryCustom {
+public class BookAuthorRepositoryCustomImpl extends QuerydslRepositorySupport implements BookAuthorRepositoryCustom {
     @Autowired
     EntityManager em;
 
-    public BookQueryRepositoryCustomImpl() {
+    public BookAuthorRepositoryCustomImpl() {
         super(Book.class);
     }
 
     @Override
-    public Page<BookQueryDto> findAllByAuthorName(Pageable pageable, String authorName) {
+    public Page<BookAuthor> findAllByAuthorName(Pageable pageable, String authorName) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
         QBook qBook = QBook.book;
@@ -31,7 +31,7 @@ public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport imp
 
         JPAQuery query = queryFactory
                 .from(qBook)
-                .select(getBookQueryProjection())
+                .select(getBookCustomProjection())
                 .join(qBookAuthor).on(qBook.id.eq(qBookAuthor.book.id))
                 .join(qAuthor).on(qAuthor.id.eq(qBookAuthor.author.id));
 
@@ -39,13 +39,13 @@ public class BookQueryRepositoryCustomImpl extends QuerydslRepositorySupport imp
             query.where(qAuthor.name.eq(authorName));
         }
 
-        return new PageImpl<BookQueryDto>(query.fetchResults().getResults(),
+        return new PageImpl<BookAuthor>(query.fetchResults().getResults(),
                 pageable,
                 query.fetchResults().getTotal());
     }
 
-    private QBean<BookQueryDto> getBookQueryProjection() {
+    private QBean<BookAuthor> getBookCustomProjection() {
         QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
-        return Projections.bean(BookQueryDto.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
+        return Projections.bean(BookAuthor.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
     }
 }
