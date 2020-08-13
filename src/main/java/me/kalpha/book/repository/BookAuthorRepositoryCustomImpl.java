@@ -18,21 +18,18 @@ public class BookAuthorRepositoryCustomImpl extends QuerydslRepositorySupport im
     EntityManager em;
 
     public BookAuthorRepositoryCustomImpl() {
-        super(Book.class);
+        super(BookAuthor.class);
     }
 
     @Override
     public Page<BookAuthor> findAllByAuthorName(Pageable pageable, String authorName) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
-        QBook qBook = QBook.book;
         QAuthor qAuthor = QAuthor.author;
         QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
 
         JPAQuery query = queryFactory
-                .from(qBook)
-                .select(getBookCustomProjection())
-                .join(qBookAuthor).on(qBook.id.eq(qBookAuthor.book.id))
+                .selectFrom(qBookAuthor)
                 .join(qAuthor).on(qAuthor.id.eq(qBookAuthor.author.id));
 
         if (!StringUtils.isEmpty(authorName)) {
@@ -44,8 +41,8 @@ public class BookAuthorRepositoryCustomImpl extends QuerydslRepositorySupport im
                 query.fetchResults().getTotal());
     }
 
-    private QBean<BookAuthor> getBookCustomProjection() {
-        QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
-        return Projections.bean(BookAuthor.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
-    }
+//    private QBean<BookAuthor> getBookCustomProjection() {
+//        QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
+//        return Projections.bean(BookAuthor.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
+//    }
 }
