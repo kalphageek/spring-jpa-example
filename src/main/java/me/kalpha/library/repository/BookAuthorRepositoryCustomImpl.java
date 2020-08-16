@@ -1,8 +1,10 @@
-package me.kalpha.book.repository;
+package me.kalpha.library.repository;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import me.kalpha.entity.*;
+import me.kalpha.entity.BookAuthor;
+import me.kalpha.entity.QAuthor;
+import me.kalpha.entity.QBookAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

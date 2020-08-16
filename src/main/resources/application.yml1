@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: postgres
+    default: kalpha
   data:
     rest:
       base-path: /api

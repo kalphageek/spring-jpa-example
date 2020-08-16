@@ -6,13 +6,14 @@ import com.querydsl.core.types.QBean;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
-import me.kalpha.book.entity.*;
-import me.kalpha.book.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import me.kalpha.entity.*;
+import me.kalpha.book.repository.BookRepository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
@@ -77,8 +78,8 @@ public class TestRunner implements ApplicationRunner {
         log.info("joinTest Count : {}", query.fetchCount());
     }
 
-    private QBean<BookDto> getBookQueryProjection() {
+    private QBean<BookAuthor> getBookQueryProjection() {
         QBookAuthor qBookAuthor = QBookAuthor.bookAuthor;
-        return Projections.bean(BookDto.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
+        return Projections.bean(BookAuthor.class, qBookAuthor.book.id, qBookAuthor.book.title, qBookAuthor.book.created, qBookAuthor.author.name.as("authorName"));
     }
 }

@@ -1,4 +1,4 @@
-package me.kalpha.book.repository;
+package me.kalpha.library.repository;
 
 import me.kalpha.entity.BookAuthor;
 import org.springframework.data.domain.Page;

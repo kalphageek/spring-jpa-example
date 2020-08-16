@@ -1,4 +1,4 @@
-package me.kalpha.book.entity;
+package me.kalpha.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,19 +6,19 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table
 @Getter @Setter
 @RequiredArgsConstructor
-public class Book {
+public class Author {
     @Id @GeneratedValue
     private Long id;
     @NotEmpty
-    private String title;
-    private LocalDateTime created;
-    @OneToMany(mappedBy = "book")
+    private String name;
+    private String postNo;
+    private String addrDetail;
+    @OneToMany(mappedBy = "author")
     private List<BookAuthor> bookAuthors;
 }

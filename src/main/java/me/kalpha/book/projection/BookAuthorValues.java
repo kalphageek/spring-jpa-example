@@ -1,13 +1,13 @@
 package me.kalpha.book.projection;
 
-import me.kalpha.book.entity.BookAuthor;
+import me.kalpha.entity.BookAuthor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.time.LocalDateTime;
 
 @Projection(name = "values", types = {BookAuthor.class})
-public interface WithValues {
+public interface BookAuthorValues {
     @Value("#{target.book.id}")
     Long getBookId();
     @Value("#{target.book.title}")

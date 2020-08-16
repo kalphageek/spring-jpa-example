@@ -1,4 +1,4 @@
-package me.kalpha.book.entity;
+package me.kalpha.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

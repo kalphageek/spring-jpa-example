@@ -1,19 +1,14 @@
 package me.kalpha.book.repository;
 
-import com.querydsl.core.QueryFactory;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import me.kalpha.book.entity.Book;
-import me.kalpha.book.entity.QBook;
+import me.kalpha.entity.Book;
+import me.kalpha.entity.QBook;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.EntityManager;
-import java.math.BigInteger;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
