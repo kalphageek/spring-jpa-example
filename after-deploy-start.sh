@@ -19,4 +19,4 @@ else echo "> kill -9 $CURRENT_PID"
 fi
 
 echo "> Deploy new version."
-nohup java -jar $JAR_NAME & > logs/$APP_NAME.logs
+nohup java -jar $JAR_NAME &
