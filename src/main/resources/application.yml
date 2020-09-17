@@ -7,26 +7,27 @@ spring:
 ---
 spring:
   profiles: local
-  jpa:
-    show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate.format_sql: true
   datasource:
     hikari:
-      jdbc-url: jdbc:h2:mem:testdb
+      jdbc-url: jdbc:h2:file:./userdb;AUTO_SERVER=TRUE;Mode=MYSQL
       username: sa
       password:
-      driver-class-name: org.h2.Driver
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+      pool-name: hikari-cp
+      minimum-idle: 10
+      maximum-pool-size: 30
+      connection-test-query: SELECT 1
+  jpa:
+    hibernate.ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate.default_batch_fetch_size: 1000
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
 
 ---
 spring:
   profiles: postgres
   jpa:
+    hibernate.ddl-auto: create
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
@@ -35,5 +36,5 @@ spring:
     hikari:
       maximum-pool-size: 4
     password: pgadmin
-    url: jdbc:postgresql://localhost:5432/kalpha
+    url: jdbc:postgresql://db.deogi:5432/postgres
     username: pgadmin

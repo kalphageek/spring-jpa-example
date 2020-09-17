@@ -1,6 +1,8 @@
 package me.kalpha.book.entity;
 
+
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
@@ -11,14 +13,18 @@ import java.util.List;
 
 @Entity
 @Table
-@Getter @Setter
+@Getter
+@Setter
 @RequiredArgsConstructor
 public class Book {
     @Id @GeneratedValue
     private Long id;
-    @NotEmpty
+
+    @NonNull
     private String title;
+
     private LocalDateTime created;
+
     @OneToMany(mappedBy = "book")
     private List<BookAuthor> bookAuthors;
 }
