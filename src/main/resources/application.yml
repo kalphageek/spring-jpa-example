@@ -27,7 +27,7 @@ spring:
 spring:
   profiles: postgres
   jpa:
-    hibernate.ddl-auto: create
+#    hibernate.ddl-auto: create
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
