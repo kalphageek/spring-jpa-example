@@ -28,9 +28,16 @@ pipeline {
   environment {
     Name = 'Jindeok Jeong'
   }
+<<<<<<< HEAD
 
   tools {
     maven 'M3'
   }
 
 }
+=======
+  tools {
+    maven 'M3'
+  }
+}
+>>>>>>> 255f2a963df46ac455f9ab48ae263d71f7b65b68
