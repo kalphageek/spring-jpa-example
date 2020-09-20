@@ -21,7 +21,10 @@ pipeline {
     stage('Deploy') {
       steps {
         echo "This is build number : ${BUILD_ID}"
-        sh '''JAR_NAME=$(ls target/*.jar | tail -n 1)
+        sh '''echo "pwd"
+pwd
+
+JAR_NAME=$(ls target/*.jar | tail -n 1)
 echo "jar name : $JAR_NAME"
 
 echo "> checking pid on the running process."
