@@ -17,27 +17,19 @@ pipeline {
         sh 'mvn -Dmaven.test.failure.ignore clean package'
       }
     }
-
-    stage('Deploy') {
-      steps {
-        echo "This is build number : ${BUILD_ID}"
+    stage("Starting API Server"){
+      withEnv(['BUILD_ID=dontkill']) {
+        sh 'start.sh & '
       }
     }
+  }
 
   }
   environment {
     Name = 'Jindeok Jeong'
   }
-<<<<<<< HEAD
 
   tools {
     maven 'M3'
   }
-
 }
-=======
-  tools {
-    maven 'M3'
-  }
-}
->>>>>>> 255f2a963df46ac455f9ab48ae263d71f7b65b68
