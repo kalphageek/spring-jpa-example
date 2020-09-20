@@ -3,7 +3,6 @@ pipeline {
     node {
       label 'agent-1'
     }
-
   }
   stages {
     stage('Source') {
@@ -27,7 +26,6 @@ pipeline {
     }
   }
 
-  }
   environment {
     Name = 'Jindeok Jeong'
   }
