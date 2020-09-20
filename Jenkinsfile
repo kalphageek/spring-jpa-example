@@ -5,9 +5,6 @@ pipeline {
     }
     stages {
         stage('Build') {
-            environment {
-                AN_ACCESS_KEY = credentials('jenkins-private-key')
-            }
             steps {
                 // Get some code from a GitHub repository
                 git 'git@github.com:kalphageek/spring-jpa-example.git'
