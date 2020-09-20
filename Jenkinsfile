@@ -15,13 +15,11 @@ pipeline {
     stage('Build') {
       steps {
         tool 'M3'
-        sh '#mvn -Dmaven.test.failure.ignore clean package'
       }
     }
 
     stage('Deploy') {
       steps {
-        sh 'echo "Success deploy"'
         echo "This is build number : ${BUILD_ID}"
       }
     }
