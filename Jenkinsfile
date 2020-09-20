@@ -22,6 +22,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh 'echo "Success deploy"'
+        echo "This is build number : ${BUILD_ID}"
       }
     }
 
