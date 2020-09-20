@@ -3,6 +3,7 @@ pipeline {
     node {
       label 'agent-1'
     }
+
   }
   stages {
     stage('Source') {
@@ -17,20 +18,20 @@ pipeline {
       }
     }
 
-    stage("Starting API Server"){
+    stage('Starting API Server') {
       steps {
-        withEnv(['BUILD_ID=dontkill']) {
+        withEnv(overrides: ['BUILD_ID=dontkill']) {
           sh 'mvn -Dexec:java &'
         }
+
       }
     }
-  }
 
-  environment {
-    Name = 'Jindeok Jeong'
   }
-
   tools {
     maven 'M3'
+  }
+  environment {
+    Name = 'Jindeok Jeong'
   }
 }
