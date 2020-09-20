@@ -21,9 +21,10 @@ pipeline {
 
     stage('Starting API Server') {
       steps {
-        withEnv(['BUILD_ID=dontkill']) {
+        withEnv(overrides: ['BUILD_ID=dontkill']) {
           sh 'service-start.sh &'
         }
+
       }
     }
 
