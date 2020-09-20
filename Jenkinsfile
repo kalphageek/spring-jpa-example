@@ -21,7 +21,7 @@ pipeline {
     stage("Starting API Server"){
       steps {
         withEnv(['BUILD_ID=dontkill']) {
-          sh 'mvn -Dexec:java' &
+          sh 'mvn -Dexec:java &'
         }
       }
     }
