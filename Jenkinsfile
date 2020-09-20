@@ -17,6 +17,7 @@ pipeline {
         sh 'mvn -Dmaven.test.failure.ignore clean package'
       }
     }
+
     stage("Starting API Server"){
       withEnv(['BUILD_ID=dontkill']) {
         sh 'mvn -Dexec:java' &
