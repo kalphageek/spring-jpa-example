@@ -29,6 +29,6 @@ pipeline {
     Name = 'Jindeok Jeong'
   }
   tool {
-    M3 'maven'
+    maven 'M3'
   }
 }
